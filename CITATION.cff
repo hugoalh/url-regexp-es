@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://citation-file-format.github.io/1.2.0/schema.json
+cff-version: "1.2.0"
+title: "URL RegExp (ES)"
+message: "If you use this software, please cite it using the metadata from this file."
+type: "software"
+authors:
+  - name: "hugoalh"
+repository-code: "https://github.com/hugoalh/url-regexp-es"
+keywords:
+  - "es"
+  - "javascript"
+  - "js"
+  - "modulejs"
+  - "regexp"
+  - "regular-expression"
+  - "ts"
+  - "typescript"
+  - "url"
+license: "MIT"
