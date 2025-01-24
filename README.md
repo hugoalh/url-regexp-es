@@ -62,7 +62,8 @@ This project is based on NPM packages [`url-regex-safe`](https://www.npmjs.com/p
 
 - ```ts
   function urlRegExp(options?: URLRegExpOptions): RegExp;
-  function urlRegExp(options: URLRegExpOptions & { returnString: true; }): string;  ```
+  function urlRegExp(options: URLRegExpOptions & { returnString: true; }): string;
+  ```
 
 > [!NOTE]
 > - For the full or prettier documentation, can visit via:
