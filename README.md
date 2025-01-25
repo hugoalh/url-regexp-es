@@ -8,7 +8,7 @@
 
 An ES (JavaScript & TypeScript) module for URL regular expression.
 
-This project is based on NPM packages [`url-regex-safe`](https://www.npmjs.com/package/url-regex-safe) and [`@types/url-regex-safe`](https://www.npmjs.com/package/@types/url-regex-safe) with these modifications:
+This is a modified edition of the NPM packages [`url-regex-safe`](https://www.npmjs.com/package/url-regex-safe) and [`@types/url-regex-safe`](https://www.npmjs.com/package/@types/url-regex-safe) which aim for:
 
 - Do not use RE2
 - ModuleJS
