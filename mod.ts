@@ -131,3 +131,4 @@ export function urlRegExp(options: URLRegExpOptions = {}): string | RegExp {
 		: new RegExp(regex, "ig")
 	);
 }
+export default urlRegExp;
