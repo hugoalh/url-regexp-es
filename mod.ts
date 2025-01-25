@@ -73,7 +73,17 @@ export interface URLRegExpOptions {
 	 */
 	trailingPeriod?: boolean;
 }
+/**
+ * Get the regular expression for the URLs.
+ * @param {URLRegExpOptions & { returnString?: false; }} [options={}] Options.
+ * @returns {RegExp}
+ */
 export function urlRegExp(options?: URLRegExpOptions & { returnString?: false; }): RegExp;
+/**
+ * Get the regular expression source string for the URLs.
+ * @param {URLRegExpOptions & { returnString: true; }} options Options.
+ * @returns {string}
+ */
 export function urlRegExp(options: URLRegExpOptions & { returnString: true; }): string;
 export function urlRegExp(options: URLRegExpOptions = {}): string | RegExp {
 	const {
