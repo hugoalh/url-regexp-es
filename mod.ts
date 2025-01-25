@@ -73,7 +73,7 @@ export interface URLRegExpOptions {
 	 */
 	trailingPeriod?: boolean;
 }
-export function urlRegExp(options?: URLRegExpOptions): RegExp;
+export function urlRegExp(options?: URLRegExpOptions & { returnString?: false; }): RegExp;
 export function urlRegExp(options: URLRegExpOptions & { returnString: true; }): string;
 export function urlRegExp(options: URLRegExpOptions = {}): string | RegExp {
 	const {
