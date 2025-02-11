@@ -9,6 +9,7 @@ await invokeDenoNodeJSTransformer({
 		"README.md"
 	],
 	entrypoints: configJSR.getExports(),
+	fixInjectedImports: true,
 	generateDeclarationMap: true,
 	mappings: {
 		"https://esm.sh/ip-regex@^5.0.0": {
