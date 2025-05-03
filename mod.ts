@@ -1,3 +1,4 @@
+//deno-lint-ignore-file hugoalh/no-import-npm
 import regexpIP from "https://esm.sh/ip-regex@^5.0.0";
 import tlds from "https://esm.sh/tlds@^1.255.0";
 function sortTLDs(input: readonly string[]): string[] {
