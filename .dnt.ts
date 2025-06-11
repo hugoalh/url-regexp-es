@@ -12,14 +12,6 @@ await invokeDenoNodeJSTransformer({
 	fixInjectedImports: true,
 	generateDeclarationMap: true,
 	mappings: {
-		"https://esm.sh/ip-regex@^5.0.0": {
-			name: "ip-regex",
-			version: "^5.0.0"
-		},
-		"https://esm.sh/tlds@^1.255.0": {
-			name: "tlds",
-			version: "^1.255.0"
-		}
 	},
 	metadata: {
 		name: configJSR.getName(),

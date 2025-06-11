@@ -6,8 +6,6 @@
 		".": "./mod.ts"
 	},
 	"imports": {
-		"https://esm.sh/ip-regex@^5.0.0": "npm:ip-regex@^5.0.0",
-		"https://esm.sh/tlds@^1.255.0": "npm:tlds@^1.255.0"
 	},
 	"publish": {
 		"exclude": [

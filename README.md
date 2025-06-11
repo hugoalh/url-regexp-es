@@ -60,8 +60,10 @@ This is a modified edition of the NPM packages [`url-regex-safe`](https://www.np
 ## 🧩 APIs
 
 - ```ts
-  function urlRegExp(options?: URLRegExpOptions & { returnString?: false; }): RegExp;
-  function urlRegExp(options: URLRegExpOptions & { returnString: true; }): string;
+  function urlRegExp(options?: URLRegExpOptions): RegExp;
+  ```
+- ```ts
+  function urlRegExpSource(options?: Omit<URLRegExpOptions, "returnString">): string;
   ```
 
 > [!NOTE]

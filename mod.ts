@@ -1,6 +1,6 @@
 //deno-lint-ignore-file hugoalh/no-import-npm
-import regexpIP from "https://esm.sh/ip-regex@^5.0.0";
-import tlds from "https://esm.sh/tlds@^1.255.0";
+import regexpIP from "npm:ip-regex@^5.0.0";
+import tlds from "npm:tlds@^1.259.0";
 function sortTLDs(input: readonly string[]): string[] {
 	return Array.from(input).sort((a: string, b: string): number => {
 		return (b.length - a.length);
@@ -59,11 +59,6 @@ export interface URLRegExpOptions {
 	 */
 	parens?: boolean;
 	/**
-	 * Whether to return the regular expression source string instead of a `RegExp`.
-	 * @default {false}
-	 */
-	returnString?: boolean;
-	/**
 	 * Whether to force the URLs start with a valid protocol or `www`.
 	 * @default {false}
 	 */
@@ -73,20 +68,19 @@ export interface URLRegExpOptions {
 	 * @default {false}
 	 */
 	trailingPeriod?: boolean;
+	/**
+	 * Whether to return the regular expression source instead of a `RegExp`.
+	 * @default {false}
+	 * @deprecated Use function {@linkcode urlRegExpSource} instead.
+	 */
+	returnString?: boolean;
 }
 /**
- * Get the regular expression for the URLs.
- * @param {URLRegExpOptions & { returnString?: false; }} [options={}] Options.
- * @returns {RegExp}
- */
-export function urlRegExp(options?: URLRegExpOptions & { returnString?: false; }): RegExp;
-/**
- * Get the regular expression source string for the URLs.
- * @param {URLRegExpOptions & { returnString: true; }} options Options.
+ * Get the regular expression source for the URLs.
+ * @param {Omit<URLRegExpOptions, "returnString">} [options] Options.
  * @returns {string}
  */
-export function urlRegExp(options: URLRegExpOptions & { returnString: true; }): string;
-export function urlRegExp(options: URLRegExpOptions = {}): string | RegExp {
+export function urlRegExpSource(options: Omit<URLRegExpOptions, "returnString"> = {}): string {
 	const {
 		apostrophes = false,
 		auth = false,
@@ -95,12 +89,11 @@ export function urlRegExp(options: URLRegExpOptions = {}): string | RegExp {
 		ipv6 = true,
 		localhost = true,
 		parens = false,
-		returnString = false,
 		strict = false,
 		tldsCustom,
 		tldsDefault = true,
 		trailingPeriod = false
-	}: URLRegExpOptions = options;
+	}: Omit<URLRegExpOptions, "returnString"> = options;
 	const partProtocol = `(?:(?:[a-z]+:)?//)${strict ? "" : "?"}`;
 	if ((tldsCustom?.length ?? 0) === 0 && !tldsDefault) {
 		throw new Error(`TLDs are not defined!`);
@@ -123,23 +116,47 @@ export function urlRegExp(options: URLRegExpOptions = {}): string | RegExp {
 	const partPath: string = trailingPeriod
 		? `(?:[/?#][^${partDisallowCharacters}]*)?`
 		: `(?:(?:[/?#][^${partDisallowCharacters}]*[^${partDisallowCharacters}.?!])|[/])?`;
-	let regex: string = `(?:${partProtocol}|www\\.)${auth ? regexpPartAuth : ""}(?:`;
+	let result: string = `(?:${partProtocol}|www\\.)${auth ? regexpPartAuth : ""}(?:`;
 	if (localhost) {
-		regex += "localhost|";
+		result += "localhost|";
 	}
 	if (ipv4) {
-		regex += `${regexpPartIPv4}|`;
+		result += `${regexpPartIPv4}|`;
 	}
 	if (ipv6) {
-		regex += `${regexpPartIPv6}|`;
+		result += `${regexpPartIPv6}|`;
 	}
-	regex += `${regexpPartHost}${regexpPartDomain}${partTLD})${regexpPartPort}${partPath}`;
+	result += `${regexpPartHost}${regexpPartDomain}${partTLD})${regexpPartPort}${partPath}`;
+	return (exact
+		? `(?:^${result}$)`
+		: result
+	);
+}
+/**
+ * Get the regular expression for the URLs.
+ * @param {URLRegExpOptions & { returnString?: false; }} [options={}] Options.
+ * @returns {RegExp}
+ */
+export function urlRegExp(options?: URLRegExpOptions & { returnString?: false; }): RegExp;
+/**
+ * Get the regular expression source string for the URLs.
+ * @param {URLRegExpOptions & { returnString: true; }} [options] Options.
+ * @returns {string}
+ * @deprecated Use function {@linkcode urlRegExpSource} instead.
+ */
+export function urlRegExp(options: URLRegExpOptions & { returnString: true; }): string;
+export function urlRegExp(options: URLRegExpOptions = {}): string | RegExp {
+	const {
+		exact = false,
+		returnString = false
+	}: URLRegExpOptions = options;
+	const result: string = urlRegExpSource(options);
 	if (returnString) {
-		return regex;
+		return result;
 	}
 	return (exact
-		? new RegExp(`(?:^${regex}$)`, "i")
-		: new RegExp(regex, "ig")
+		? new RegExp(result, "i")
+		: new RegExp(result, "ig")
 	);
 }
 export default urlRegExp;
