@@ -1,6 +1,6 @@
 //deno-lint-ignore-file hugoalh/no-import-npm
 import regexpIP from "npm:ip-regex@^5.0.0";
-import tlds from "npm:tlds@^1.259.0";
+import tlds from "npm:tlds@^1.259.0" with {type: "json"};
 function sortTLDs(input: readonly string[]): string[] {
 	return Array.from(input).sort((a: string, b: string): number => {
 		return (b.length - a.length);
