@@ -1,6 +1,6 @@
 //deno-lint-ignore-file hugoalh/no-import-npm
 import regexpIP from "npm:ip-regex@^5.0.0";
-import tlds from "npm:tlds@^1.259.0" with {type: "json"};
+import tlds from "npm:tlds@^1.259.0" with { type: "json" };
 function sortTLDs(input: readonly string[]): string[] {
 	return Array.from(input).sort((a: string, b: string): number => {
 		return (b.length - a.length);
@@ -68,19 +68,13 @@ export interface URLRegExpOptions {
 	 * @default {false}
 	 */
 	trailingPeriod?: boolean;
-	/**
-	 * Whether to return the regular expression source instead of a `RegExp`.
-	 * @default {false}
-	 * @deprecated Use function {@linkcode urlRegExpSource} instead.
-	 */
-	returnString?: boolean;
 }
 /**
  * Get the regular expression source for the URLs.
- * @param {Omit<URLRegExpOptions, "returnString">} [options] Options.
+ * @param {URLRegExpOptions} [options] Options.
  * @returns {string}
  */
-export function urlRegExpSource(options: Omit<URLRegExpOptions, "returnString"> = {}): string {
+export function urlRegExpSource(options: URLRegExpOptions = {}): string {
 	const {
 		apostrophes = false,
 		auth = false,
@@ -90,18 +84,15 @@ export function urlRegExpSource(options: Omit<URLRegExpOptions, "returnString"> 
 		localhost = true,
 		parens = false,
 		strict = false,
-		tldsCustom,
+		tldsCustom = [],
 		tldsDefault = true,
 		trailingPeriod = false
-	}: Omit<URLRegExpOptions, "returnString"> = options;
+	}: URLRegExpOptions = options;
 	const partProtocol = `(?:(?:[a-z]+:)?//)${strict ? "" : "?"}`;
-	if ((tldsCustom?.length ?? 0) === 0 && !tldsDefault) {
+	if (tldsCustom.length === 0 && !tldsDefault) {
 		throw new Error(`TLDs are not defined!`);
 	}
-	const tldsFinal: string[] = [];
-	if (typeof tldsCustom !== "undefined") {
-		tldsFinal.push(...tldsCustom);
-	}
+	const tldsFinal: string[] = [...tldsCustom];
 	if (tldsDefault) {
 		tldsFinal.push(...tlds);
 	}
@@ -127,36 +118,15 @@ export function urlRegExpSource(options: Omit<URLRegExpOptions, "returnString"> 
 		result += `${regexpPartIPv6}|`;
 	}
 	result += `${regexpPartHost}${regexpPartDomain}${partTLD})${regexpPartPort}${partPath}`;
-	return (exact
-		? `(?:^${result}$)`
-		: result
-	);
+	return (exact ? `^${result}$` : result);
 }
 /**
  * Get the regular expression for the URLs.
- * @param {URLRegExpOptions & { returnString?: false; }} [options={}] Options.
+ * @param {URLRegExpOptions} [options={}] Options.
  * @returns {RegExp}
  */
-export function urlRegExp(options?: URLRegExpOptions & { returnString?: false; }): RegExp;
-/**
- * Get the regular expression source string for the URLs.
- * @param {URLRegExpOptions & { returnString: true; }} [options] Options.
- * @returns {string}
- * @deprecated Use function {@linkcode urlRegExpSource} instead.
- */
-export function urlRegExp(options: URLRegExpOptions & { returnString: true; }): string;
-export function urlRegExp(options: URLRegExpOptions = {}): string | RegExp {
-	const {
-		exact = false,
-		returnString = false
-	}: URLRegExpOptions = options;
-	const result: string = urlRegExpSource(options);
-	if (returnString) {
-		return result;
-	}
-	return (exact
-		? new RegExp(result, "i")
-		: new RegExp(result, "ig")
-	);
+export function urlRegExp(options: URLRegExpOptions = {}): RegExp {
+	const { exact = false }: URLRegExpOptions = options;
+	return new RegExp(urlRegExpSource(options), exact ? "i" : "ig");
 }
 export default urlRegExp;
