@@ -2,9 +2,10 @@
 
 [**⚖️** MIT](./LICENSE.md)
 
-[![GitHub: hugoalh/url-regexp-es](https://img.shields.io/github/v/release/hugoalh/url-regexp-es?label=hugoalh/url-regexp-es&labelColor=181717&logo=github&logoColor=ffffff&sort=semver&style=flat "GitHub: hugoalh/url-regexp-es")](https://github.com/hugoalh/url-regexp-es)
-[![JSR: @hugoalh/url-regexp](https://img.shields.io/jsr/v/@hugoalh/url-regexp?label=@hugoalh/url-regexp&labelColor=F7DF1E&logo=jsr&logoColor=000000&style=flat "JSR: @hugoalh/url-regexp")](https://jsr.io/@hugoalh/url-regexp)
-[![NPM: @hugoalh/url-regexp](https://img.shields.io/npm/v/@hugoalh/url-regexp?label=@hugoalh/url-regexp&labelColor=CB3837&logo=npm&logoColor=ffffff&style=flat "NPM: @hugoalh/url-regexp")](https://www.npmjs.com/package/@hugoalh/url-regexp)
+🔗
+[GitHub](https://github.com/hugoalh/url-regexp-es)
+[JSR](https://jsr.io/@hugoalh/url-regexp)
+[NPM](https://www.npmjs.com/package/@hugoalh/url-regexp)
 
 An ECMAScript module for URL regular expression.
 
