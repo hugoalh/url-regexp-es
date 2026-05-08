@@ -4,8 +4,8 @@
 
 🔗
 [GitHub](https://github.com/hugoalh/url-regexp-es)
-[JSR](https://jsr.io/@hugoalh/url-regexp)
-[NPM](https://www.npmjs.com/package/@hugoalh/url-regexp)
+● [JSR](https://jsr.io/@hugoalh/url-regexp)
+● [NPM](https://www.npmjs.com/package/@hugoalh/url-regexp)
 
 An ECMAScript module for URL regular expression.
 
