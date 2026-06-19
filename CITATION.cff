@@ -4,7 +4,8 @@ title: "URL RegExp (ES)"
 message: "If you use this software, please cite it using the metadata from this file."
 type: "software"
 authors:
-  - name: "hugoalh"
+  - name: "HUGOALH"
+    alias: "hugoalh"
 repository-code: "https://github.com/hugoalh/url-regexp-es"
 keywords:
   - "ecmascript"
