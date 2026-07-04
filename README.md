@@ -3,7 +3,8 @@
 [**⚖️** MIT](./LICENSE.md)
 
 🔗
-[GitHub](https://github.com/hugoalh/url-regexp-es)
+[DistBoard @hugoalh](https://hugoalh.github.io/distboard/url_regexp_ecmascript)
+● [GitHub](https://github.com/hugoalh/url-regexp-es)
 ● [JSR](https://jsr.io/@hugoalh/url-regexp)
 ● [NPM](https://www.npmjs.com/package/@hugoalh/url-regexp)
 

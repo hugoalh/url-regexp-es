@@ -7,6 +7,7 @@ authors:
   - name: "HUGOALH"
     alias: "hugoalh"
 repository-code: "https://github.com/hugoalh/url-regexp-es"
+abstract: "An ECMAScript module for URL regular expression."
 keywords:
   - "ecmascript"
   - "es"
