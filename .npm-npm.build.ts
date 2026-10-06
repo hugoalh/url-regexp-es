@@ -10,7 +10,6 @@ await transform({
 	],
 	//@ts-ignore Lazy type.
 	entrypointsScript: manifest.exports,
-	generateDeclarationMap: true,
 	mappings: {
 	},
 	metadata: {
